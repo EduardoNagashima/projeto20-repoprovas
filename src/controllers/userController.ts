@@ -13,5 +13,9 @@ export async function signup(req: Request, res: Response) {
 }
 
 export async function signin(req: Request, res: Response) {
-
+    const user = req.body;
+    const { error } = userSchema.validate(user);
+    if (error) throw { type: 'BAD_REQUEST', message: error.details };
+    const token = await userService.signIn(user);
+    res.status(200).send(token);
 }

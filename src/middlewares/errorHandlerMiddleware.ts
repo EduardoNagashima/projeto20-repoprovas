@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 
 export default function errorHandler(error, req: Request, res: Response, next: NextFunction) {
     let statusCode = 500;
-    console.log('Ops, error: ', error);
 
     if (error.type) {
         if (error.type === 'BAD_REQUEST') statusCode = 400;
@@ -10,6 +9,8 @@ export default function errorHandler(error, req: Request, res: Response, next: N
         if (error.type === 'CONFLICT') statusCode = 409;
         if (error.type === 'UNAUTHORIZED') statusCode = 401;
         return res.status(statusCode).send(error.message);
+    } else {
+        console.log(error);
     }
 
     res.status(statusCode).send('Houve algum problema na aplicação, por favor tente novamente.');
