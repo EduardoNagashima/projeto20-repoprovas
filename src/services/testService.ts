@@ -1,16 +1,14 @@
 
+import { Test } from "@prisma/client";
 import { categoryRepository } from "../repositories/categoryRepository.js";
 import { disciplineRepository } from "../repositories/disciplineRepository.js";
 import { teacherDisciplineRepository } from "../repositories/teacherDisciplineRepository.js";
 import { teacherRepository } from "../repositories/teacherRepository.js";
 import { testRepository } from "../repositories/testRepository.js";
 
-export type testData = {
-    "name": string
-    "pdfUrl": string
-    "categoryId": number
-    "disciplineId": number
-    "teacherId": number
+export interface testData extends Test {
+    disciplineId: number
+    teacherId: number
 }
 
 async function create(test: testData) {
@@ -26,6 +24,11 @@ async function create(test: testData) {
     await testRepository.create({ ...test, teacherDisciplineId: teacherDiscipline.id });
 }
 
+async function findByDiscipline() {
+    return await testRepository.findByDiscipline();
+}
+
 export const testService = {
-    create
+    create,
+    findByDiscipline
 }

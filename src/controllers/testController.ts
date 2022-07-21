@@ -11,6 +11,14 @@ async function create(req: Request, res: Response) {
     return res.sendStatus(201);
 }
 
+async function findByDiscipline(req: Request, res: Response) {
+    const result = await testService.findByDiscipline();
+
+    return res.send(result);
+}
+
+
 export const testController = {
-    create
+    create,
+    findByDiscipline
 }
