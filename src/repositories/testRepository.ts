@@ -7,41 +7,35 @@ async function create(test: Test) {
 
 async function findByDiscipline() {
     return await prisma.term.findMany({
-        select: {
+        select:{
             id: true,
             number: true,
-            Discipline: {
-                select: {
+            discipline:{
+                select:{
                     id: true,
                     name: true,
-                    teachersDisciplines: {
-                        select: {
-                            Test: {
-                                select: {
-                                    category: {
+                    category:{
+                        select:{
+                            id:true,
+                            name: true,
+                            test: {
+                                select:{
+                                    id: true,
+                                    name: true,
+                                    pdfUrl: true,
+                                    teachersDisciplines:{
                                         select: {
-                                            id: true,
-                                            name: true,
-                                            Test: {
-                                                select: {
-                                                    id: true,
-                                                    teachersDisciplines: { select: { teacher: { select: { id: true, name: true } } } },
-                                                    name: true,
-                                                    pdfUrl: true,
-                                                }
-                                            }
-
+                                            teacher:true
                                         }
-                                    },
-
+                                    }
                                 }
                             }
+                            
                         }
                     }
                 }
             }
-        }
-    })
+    }})
 }
 
 export const testRepository = {
