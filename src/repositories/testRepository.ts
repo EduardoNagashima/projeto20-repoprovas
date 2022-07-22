@@ -38,7 +38,41 @@ async function findByDiscipline() {
     }})
 }
 
+async function findByTeacher(){
+    return prisma.teacher.findMany({
+        select:{
+            id: true,
+            name: true,
+            teachersDisciplines:{
+                select:{
+                    Test:{
+                        select:{
+                            category:{
+                                select:{
+                                    id:true,
+                                    name: true,
+                                    test: {
+                                        select:{
+                                            id: true,
+                                            name: true,
+                                            pdfUrl: true,
+                                            teachersDisciplines: {
+                                                include:{discipline: true}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    })
+}
+
 export const testRepository = {
     create,
     findByDiscipline,
+    findByTeacher
 }

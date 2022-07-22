@@ -13,12 +13,16 @@ async function create(req: Request, res: Response) {
 
 async function findByDiscipline(req: Request, res: Response) {
     const result = await testService.findByDiscipline();
-
     return res.send(result);
 }
 
+async function findByTeacher(req: Request, res:Response) {
+    const result = await testService.findByTeacher();
+    return res.send(result);
+}
 
 export const testController = {
     create,
-    findByDiscipline
+    findByDiscipline,
+    findByTeacher
 }

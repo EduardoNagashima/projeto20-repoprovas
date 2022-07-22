@@ -19,16 +19,23 @@ async function create(test: testData) {
     const teacher = await teacherRepository.findById(test.teacherId);
     if (!teacher) throw { type: 'NOT_FOUND', message: "Professor não encontrada!" };
     const teacherDiscipline = await teacherDisciplineRepository.findByIds(test.disciplineId, test.teacherId);
+    if (!teacherDiscipline) throw { type: 'NOT_FOUND', message: "Professor e disciplina não compativeis!" };
+    test = { ...test, teacherDisciplineId: teacherDiscipline.id };
     delete test.teacherId;
     delete test.disciplineId;
-    await testRepository.create({ ...test, teacherDisciplineId: teacherDiscipline.id });
+    await testRepository.create(test);
 }
 
 async function findByDiscipline() {
     return await testRepository.findByDiscipline();
 }
 
+async function findByTeacher(){
+    return await testRepository.findByTeacher();
+}
+
 export const testService = {
     create,
-    findByDiscipline
+    findByDiscipline,
+    findByTeacher
 }

@@ -23,6 +23,7 @@ model Category {
   name       String       @unique
   test       Test[]
   discipline Discipline[]
+  Teacher    Teacher[]
 
   @@map("categories")
 }
@@ -51,6 +52,8 @@ model Teacher {
   id                  Int                  @id @default(autoincrement())
   name                String
   teachersDisciplines TeachersDiscipline[]
+  category            Category             @relation(fields: [categoryId], references: [id])
+  categoryId          Int
 
   @@map("teachers")
 }
