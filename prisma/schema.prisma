@@ -19,22 +19,20 @@ model User {
 }
 
 model Category {
-  id         Int          @id @default(autoincrement())
-  name       String       @unique
-  test       Test[]
-  discipline Discipline[]
-  Teacher    Teacher[]
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  test Test[]
 
   @@map("categories")
 }
 
 model Test {
-  id                  Int                @id @default(autoincrement())
+  id                  Int               @id @default(autoincrement())
   name                String
   pdfUrl              String
-  category            Category           @relation(fields: [categoryId], references: [id])
+  category            Category          @relation(fields: [categoryId], references: [id])
   categoryId          Int
-  teachersDisciplines TeachersDiscipline @relation(fields: [teacherDisciplineId], references: [id])
+  teachersDisciplines TeacherDiscipline @relation(fields: [teacherDisciplineId], references: [id])
   teacherDisciplineId Int
 
   @@map("tests")
@@ -49,28 +47,24 @@ model Term {
 }
 
 model Teacher {
-  id                  Int                  @id @default(autoincrement())
+  id                  Int                 @id @default(autoincrement())
   name                String
-  teachersDisciplines TeachersDiscipline[]
-  category            Category             @relation(fields: [categoryId], references: [id])
-  categoryId          Int
+  teachersDisciplines TeacherDiscipline[]
 
   @@map("teachers")
 }
 
 model Discipline {
-  id                  Int                  @id @default(autoincrement())
-  name                String               @unique
-  term                Term                 @relation(fields: [termId], references: [id])
+  id                  Int                 @id @default(autoincrement())
+  name                String              @unique
+  term                Term                @relation(fields: [termId], references: [id])
   termId              Int
-  category            Category             @relation(fields: [categoryId], references: [id])
-  categoryId          Int
-  teachersDisciplines TeachersDiscipline[]
+  teachersDisciplines TeacherDiscipline[]
 
   @@map("disciplines")
 }
 
-model TeachersDiscipline {
+model TeacherDiscipline {
   id           Int        @id @default(autoincrement())
   discipline   Discipline @relation(fields: [disciplineId], references: [id])
   disciplineId Int

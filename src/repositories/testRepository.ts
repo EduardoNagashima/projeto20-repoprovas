@@ -7,68 +7,16 @@ async function create(test: Test) {
 
 async function findByDiscipline() {
     return await prisma.term.findMany({
-        select:{
+        select: {
             id: true,
             number: true,
-            discipline:{
-                select:{
-                    id: true,
-                    name: true,
-                    category:{
-                        select:{
-                            id:true,
-                            name: true,
-                            test: {
-                                select:{
-                                    id: true,
-                                    name: true,
-                                    pdfUrl: true,
-                                    teachersDisciplines:{
-                                        select: {
-                                            teacher:true
-                                        }
-                                    }
-                                }
-                            }
-                            
-                        }
-                    }
-                }
-            }
-    }})
-}
-
-async function findByTeacher(){
-    return prisma.teacher.findMany({
-        select:{
-            id: true,
-            name: true,
-            teachersDisciplines:{
-                select:{
-                    Test:{
-                        select:{
-                            category:{
-                                select:{
-                                    id:true,
-                                    name: true,
-                                    test: {
-                                        select:{
-                                            id: true,
-                                            name: true,
-                                            pdfUrl: true,
-                                            teachersDisciplines: {
-                                                include:{discipline: true}
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            discipline: true
         }
     })
+}
+
+async function findByTeacher() {
+    return prisma.teacher.findMany({})
 }
 
 export const testRepository = {
