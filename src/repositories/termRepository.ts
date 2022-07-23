@@ -2,13 +2,25 @@ import prisma from "../config/database.js";
 
 async function findByDiscipline() {
     return await prisma.term.findMany({
-        select: {
-            id: true,
-            number: true,
-            discipline: true
+        orderBy: { number: "asc" },
+        include: {
+            discipline: {
+                include: {
+                    teachersDisciplines: {
+                        include: {
+                            discipline: {},
+                            teacher: {},
+                            Test: {
+                                include: { category: {} }
+                            }
+                        }
+                    }
+                }
+            }
         }
     })
 }
+
 
 const termRepository = {
     findByDiscipline

@@ -23,7 +23,7 @@ async function create(test: testData) {
     if (!teacherDiscipline) throw { type: 'NOT_FOUND', message: "Professor e disciplina não compativeis!" };
     test = { ...test, teacherDisciplineId: teacherDiscipline.id };
     delete test.disciplineId
-    delete test.disciplineId;
+    delete test.teacherId;
     await testRepository.create(test);
 }
 
