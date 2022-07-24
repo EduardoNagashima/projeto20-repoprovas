@@ -1,18 +1,17 @@
-import app from "../src/index.js";
-import supertest from "supertest";
-
+import app from '../src/index.js';
+import supertest from 'supertest';
 import prisma from "../src/config/database.js";
 
-// beforeAll(async () => {
-//     await prisma.$executeRaw`TRUNCATE TABLE users;`;
-// });
+beforeAll(async () => {
+    await prisma.$executeRaw`TRUNCATE TABLE "users", "sessions";`;
+});
 
-describe("POST/ User authentication test", () => {
+describe("POST/ Sign Up Test", () => {
     const body = {
-        email: 'test_email@gmail.com',
-        password: "123456",
-        confirmPassword: "123456"
-    };
+        email: 'teste2@gmail.com',
+        password: '123',
+        confirmPassword: '123'
+    }
 
     it('Sign Up Test', async () => {
         const result = await supertest(app).post("/signup").send(body);
@@ -25,16 +24,17 @@ describe("POST/ User authentication test", () => {
     });
 });
 
-describe("POST/ User authentication test", () => {
+describe("POST/ Sign In Test", () => {
     const body = {
-        email: 'test_email@gmail.com',
-        password: "123456"
-    };
+        email: 'teste2@gmail.com',
+        password: '123'
+    }
 
     it('Sign In Test', async () => {
         const result = await supertest(app).post("/signin").send(body);
         expect(result.status).toEqual(200);
     });
+
 });
 
 afterAll(async () => {

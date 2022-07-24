@@ -7,8 +7,10 @@
   "scripts": {
     "build": "tsc src/index.ts",
     "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts",
-    "test": "npx dotenv-cli -e .env.test jest -i"
+    "dev": "nodemon src/server.ts",
+    "test": "npx dotenv-cli -e .env.test jest -i",
+    "test2": "dotenv -e .env.test prisma migrate dev && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
+    "test3": "NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i"
   },
   "keywords": [],
   "author": "",

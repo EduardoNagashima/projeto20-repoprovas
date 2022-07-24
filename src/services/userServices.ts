@@ -3,6 +3,7 @@ import { userRepository } from "../repositories/userRepository.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv";
+import tokenRepository from "../repositories/tokenRepository.js";
 dotenv.config();
 
 
@@ -20,7 +21,9 @@ export async function signIn(user: userData) {
     if (!userInfo) throw { type: 'NOT_FOUND', message: 'Usuário não encontrado.' };
     const correctPassword = bcrypt.compareSync(user.password, userInfo.password);
     if (!userInfo || !correctPassword) throw { type: 'UNAUTHORIZED', message: 'Senha inválida para este usuário.' };
-    return jwt.sign({ userId: userInfo.id }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 * 30 });
+    const token = jwt.sign({ userId: userInfo.id }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 * 30 });
+    await tokenRepository.create({ token: token, userId: userInfo.id });
+    return token
 }
 
 export const userService = {
