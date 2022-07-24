@@ -8,7 +8,7 @@ beforeAll(async () => {
 
 describe("POST/ Sign Up Test", () => {
     const body = {
-        email: 'teste2@gmail.com',
+        email: 'teste@gmail.com',
         password: '123',
         confirmPassword: '123'
     }
@@ -26,7 +26,7 @@ describe("POST/ Sign Up Test", () => {
 
 describe("POST/ Sign In Test", () => {
     const body = {
-        email: 'teste2@gmail.com',
+        email: 'teste@gmail.com',
         password: '123'
     }
 
