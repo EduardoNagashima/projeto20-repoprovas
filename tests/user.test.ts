@@ -3,9 +3,9 @@ import supertest from "supertest";
 
 import prisma from "../src/config/database.js";
 
-beforeAll(async () => {
-    await prisma.$executeRaw`TRUNCATE TABLE users;`;
-});
+// beforeAll(async () => {
+//     await prisma.$executeRaw`TRUNCATE TABLE users;`;
+// });
 
 describe("POST/ User authentication test", () => {
     const body = {

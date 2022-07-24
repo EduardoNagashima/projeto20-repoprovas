@@ -13,14 +13,14 @@ import prisma from "../src/config/database.js";
 //     };
 
 //     it('Create new test', async () => {
-//         const result = await supertest(app).post("/signup").send(body);
+//         const result = await supertest(app).post("/signup").send(headers);
 //         expect(result.status).toEqual(201);
 //     });
 
 // });
 
 describe("GET/ get tests test", () => {
-    const token = 'Bearer SeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1ODQxMTA0NiwiZXhwIjoxNjYxMDAzMDQ2fQ.RoEliPzgK8VNNka1eGwa-yyaBmCLfLa_lESohsJE6u8'
+    const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsImlhdCI6MTY1ODYzMDM0OSwiZXhwIjoxNjYxMjIyMzQ5fQ.Z2htKzYLOS2aRmiQElAs99JRgpehrIAdpgthupdQx8c'
         ;
 
     it('Get tests by disciplines', async () => {

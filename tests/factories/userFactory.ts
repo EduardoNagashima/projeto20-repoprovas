@@ -1,0 +1,1 @@
+//criar sessão no banco com o token, usar o faker pra fazer os dados, usar o factory
