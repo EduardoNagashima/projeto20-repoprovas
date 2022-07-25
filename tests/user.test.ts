@@ -2,9 +2,9 @@ import app from '../src/index.js';
 import supertest from 'supertest';
 import prisma from "../src/config/database.js";
 
-beforeAll(async () => {
-    await prisma.$executeRaw`TRUNCATE TABLE "users", "sessions";`;
-});
+// beforeAll(async () => {
+//     await prisma.$executeRaw`TRUNCATE TABLE "users", "sessions";`;
+// });
 
 describe("POST/ Sign Up Test", () => {
     const body = {
